@@ -1,246 +1,130 @@
+# Data & Knowledge Representation – Graph ML Tutorial
 
-# 1. Introduction: Why Graph ML?
+### **Applying Graph Convolutional and Attention Networks to Paper Classification in Citation Networks**
 
-Deep learning usually works on grids (images), sequences (text), or tables.
-But many real-world systems are **networks**:
-
-* citation networks
-* social networks
-* knowledge graphs
-* molecules
-* transaction networks
-* recommendation systems
-
-These structures can’t be captured by CNNs or transformers directly.
-This is where **Graph Neural Networks** come in.
-
-In this tutorial, we focus on the classic benchmark:
-
-### Classifying scientific papers using their citations + text features
-
-Each paper is a **node**, each citation is an **edge**, and each node has a **1433-dimensional bag-of-words feature vector**.
-The goal is to predict the **research topic** of each paper.
+**Live Tutorial Website:**\
+[https://dkr-gcn-gat-tutorial.vercel.app](https://dkr-gcn-gat-tutorial.vercel.app)
 
 ---
 
-# 2. Dataset Overview: The Cora Citation Network
+## Overview
 
-We use the Cora dataset from Planetoid (built into PyG):
+This repository contains an interactive tutorial for the **Data and Knowledge Representation** course, demonstrating how to apply **Graph Neural Networks (GNNs)** to a real-world machine learning problem:
 
-```python
-from torch_geometric.datasets import Planetoid
-dataset = Planetoid(root="/tmp/Cora", name="Cora")
-data = dataset[0]
-```
+### *Classifying scientific papers in a citation network.*
 
-### Dataset summary
+We build and compare two foundational GNN architectures:
 
-| Property        | Value                               |
-| --------------- | ----------------------------------- |
-| Number of nodes | 2708 papers                         |
-| Number of edges | 5429 citations                      |
-| Node features   | 1433 words                          |
-| Classes         | 7 research topics                   |
-| Task            | Semi-supervised node classification |
+* **Graph Convolutional Network (GCN)**
+* **Graph Attention Network (GAT)**
 
-Why Cora?
+Both are implemented in **PyTorch Geometric (PyG)** and trained on the **Cora citation dataset**, one of the most widely used benchmarks in graph machine learning.
 
-* It is small and fast to train
-* It has meaningful community structure
-* Perfect for GCN/GAT comparisons
-* Very widely used in graph ML tutorials and papers
+The project consists of:
+
+* A **fully interactive tutorial website** explaining concepts step-by-step
+* **Jupyter notebooks** (Colab-ready) implementing GCN and GAT
+* Visualizations and interpretation of learned embeddings
+* A discussion comparing both architectures
 
 ---
 
-# 3. What We Build
+## Project Goal
 
-We train and compare **two fundamental GNN architectures**:
+Our aim is to create a beginner-friendly yet technically rigorous tutorial that assumes the reader:
+
+✔ knows Python, PyTorch, and basic deep learning
+✖️ but is *new to* Graph Machine Learning and PyTorch Geometric
+
+By the end of the tutorial, users should understand:
+
+* What graph-structured data is and why graphs matter
+* How message passing works in GNNs
+* The math behind GCN and GAT
+* How to load and process Cora in PyG
+* How to train and evaluate graph neural networks
+* How GCN and GAT differ in performance and complexity
+
+---
+
+## Application Domain: Paper Classification in Citation Networks
+
+Scientific papers form natural graphs: each paper cites others, forming a rich structure.
+The **Cora dataset** models this relationship:
+
+| Property      | Value                               |
+| ------------- | ----------------------------------- |
+| Nodes         | 2,708 papers                        |
+| Edges         | 5,429 citation links                |
+| Node features | 1,433 words (bag-of-words)          |
+| Classes       | 7 research topics                   |
+| Task          | Semi-supervised node classification |
+
+---
+
+## Models Covered
 
 ### - Graph Convolutional Network (GCN)
 
-* Performs **weighted neighborhood averaging**
-* Fast, simple, widely used
-* Ideal baseline
+Learns node representations via neighborhood feature aggregation using:
 
-### -  Graph Attention Network (GAT)
-
-* Learns **attention weights** on edges
-* Allows the model to focus on the most relevant neighbors
-* More expressive than GCN
-
-Both are implemented with PyTorch Geometric.
-
----
-
-# 4. Understanding the Models (Intuitively)
-
-This tutorial is designed so someone new to graph ML can still follow everything.
-
----
-
-## 4.1 GCN — Graph Convolutional Network
-
-GCN performs a “smoothed feature aggregation”:
-
-[
+$$
 H^{(l+1)} = \sigma(\tilde{D}^{-1/2} \tilde{A}\tilde{D}^{-1/2} H^{(l)} W^{(l)})
-]
+$$
 
-In plain language:
+### - Graph Attention Network (GAT)
 
-> Every node updates its representation by taking a **normalized average** of its neighbors’ features (including itself).
+Extends GCN with a learnable attention mechanism:
 
-This works extremely well when the graph is **homophilous** (connected nodes tend to have similar labels) — and Cora is such a graph.
+$$
+h'_i = \sigma\left(\sum_{j \in \mathcal{N}(i)} \alpha_{ij} W h_j\right)
+$$
 
-### GCN model (from `01_gcn_cora.ipynb`)
-
-```python
-class GCN(torch.nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.conv1 = GCNConv(dataset.num_features, 64)
-        self.conv2 = GCNConv(64, dataset.num_classes)
-
-    def forward(self, x, edge_index):
-        x = self.conv1(x, edge_index)
-        x = F.relu(x)
-        x = F.dropout(x, training=self.training)
-        x = self.conv2(x, edge_index)
-        return x
-```
-
-It’s simple but surprisingly strong.
+where attention weights ( $\alpha_{ij}$, $\mathcal{N}(i)$ ) depend on the importance of neighbor (j).
 
 ---
 
-## 4.2 GAT — Graph Attention Network
+## Tutorial Website
 
-Instead of averaging all neighbors equally, GAT learns **attention scores** for each edge:
+Our tutorial website walks through:
 
-[
-\alpha_{ij} = \text{softmax}_j(a^\top [Wh_i ,\Vert, Wh_j])
-]
+* Cora dataset breakdown
+* Message passing intuition
+* GCN math and PyG implementation
+* GAT math and PyG implementation
+* Training curves, loss plots, and accuracy comparisons
+* Embedding visualization
+* Final evaluation and discussion
 
-This answers the question:
-
-> “Which neighboring papers are most relevant when classifying this one?”
-
-GAT can capture:
-
-* important citations
-* asymmetric influence
-* local heterogeneity in neighborhoods
-
-We use `GATConv` from PyG.
+ **Visit the site:**
+[https://dkr-gcn-gat-tutorial.vercel.app](https://dkr-gcn-gat-tutorial.vercel.app)
 
 ---
 
-# 5. Running the Tutorial
+## Colab Notebooks
 
-## Option A — Google Colab (recommended)
 
-No installation needed. Each notebook works entirely in Colab:
-
-| Notebook              | Link          |
-| --------------------- | ------------- |
-| GCN Tutorial          | *to be added* |
-| GAT Tutorial          | *to be added* |
-| GCN vs GAT Comparison | *to be added* |
+| Notebook              | Link            |
+| --------------------- | --------------- |
+| GCN on Cora           | *(coming soon)* |
+| GAT on Cora           | *(coming soon)* |
+| GCN vs GAT comparison | *(coming soon)* |
 
 ---
 
-## Option B — Run locally
+## Team
 
-### Clone the repository
+This project was developed as part of the
+**Data and Knowledge Representation – Machine Learning for Graphs** course.
 
-```bash
-git clone https://github.com/yourusername/cora-gcn-gat-tutorial.git
-cd cora-gcn-gat-tutorial
-```
+**Team members:**
 
-### Install requirements
-
-```
-pip install -r requirements.txt
-```
-
-### Launch Jupyter
-
-```
-jupyter notebook
-```
-
-Open any notebook from the `/notebooks/` folder.
+* **Yasmina Mamadalieva** — GCN implementation & experiments
+* **Sofa Goryunova** — GAT implementation & experiments
+* **Ekaterina Akimenko** — Tutorial writing, website development, comparison analysis
 
 ---
 
-# 6. GCN Results (early experiments)
+## Deployment
 
-After experimenting with several GCN architectures:
-
-* deeper GCNs → worse performance
-* residual GCNs → no improvement
-* batchnorm + dropout → did not beat simple model
-
-This is expected because **Cora is small** and **homophilous** — deep GNNs tend to **over-smooth** features.
-
-A simple **2-layer GCN** works best.
-
-### Plots from the notebook
-
-(Your real plots go here later.)
-
-* Training loss curve
-* Validation accuracy
-* t-SNE visualization of learned node embeddings
-
-These will be added from `/figures/`.
-
----
-
-# 7. GCN vs GAT — Comparison (planned)
-
-This section will be updated once the GAT results are ready.
-
-We will compare:
-
-* ✔ Test accuracy
-* ✔ Training speed
-* ✔ Attention weights visualization
-* ✔ Embedding quality (t-SNE)
-* ✔ Model capacity vs overfitting
-
-Expected outcome:
-
-* GAT may slightly outperform GCN
-* but GCN is faster and simpler
-* both models are strong baselines for citation networks
-
----
-
-# 8. Team
-
-* **Yasmina Mamadalieva** – GCN implementation
-* **Sofa Goryunova** – GAT implementation
-* **Ekaterina Akimenko** – Project structure, tutorial writing, comparison notebook & plots
-
----
-
-# 10. Conclusion
-
-In this tutorial, we demonstrated how to:
-
-* load a graph dataset with PyG
-* implement GCN and GAT from scratch
-* train them on the Cora citation network
-* visualize node embeddings
-* compare two foundational GNN architectures
-
-Our goal was to make graph ML **easy to learn**, **practical**, and **well-visualized**, even if you are completely new to PyTorch Geometric.
-
-If you're following along, feel free to extend our work:
-
-* Add GraphSAGE
-* Try different datasets
-* Add hyperparameter sweeps
-* Explore interpretability of attention scores
+The site is deployed using **Vercel** with a React + Vite setup.
