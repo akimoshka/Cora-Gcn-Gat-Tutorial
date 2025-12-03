@@ -149,7 +149,7 @@ You can run all experiments directly in Google Colab:
 |-----------------------|------|
 | GCN on Cora           | [Open in Colab](https://colab.research.google.com/drive/1Jv7DPatVyO61ydvaOjDJAkjiowV_aKNx?authuser=0#scrollTo=dAIZ3kkY3lTE) |
 | GAT on Cora           | [Open in Colab](https://colab.research.google.com/drive/1y2B-9Dsn8JBB8q5jR75p1GInkFc-7i8i?usp=sharing#scrollTo=BH5iYWvhLnBN) |
-| GCN vs GAT comparison | _(coming soon)_ |
+| GCN vs GAT comparison | [Open in Colab](https://colab.research.google.com/drive/1ROgAUnXgXtReR3-tfGvHZkIC9iUdAq03?usp=sharing) |
 
 Each notebook:
 

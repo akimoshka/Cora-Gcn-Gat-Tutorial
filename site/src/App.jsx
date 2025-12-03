@@ -633,7 +633,13 @@ class GAT(torch.nn.Module):
               </a>
             </li>
             <li>
-              <span>GCN vs GAT comparison — Colab (coming soon)</span>
+              <a
+                href="https://colab.research.google.com/drive/1ROgAUnXgXtReR3-tfGvHZkIC9iUdAq03?usp=sharing"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GCN vs GAT comparison — Colab
+              </a>
             </li>
           </ul>
 
