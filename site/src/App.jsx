@@ -168,6 +168,7 @@ print("Features per node:", dataset.num_node_features)`}
               src={ClassDistrCora}
               alt="Class distribution in the Cora dataset"
               className="figure"
+              style={{ width: "90%", maxWidth: "1200px" }}
             />
             <p className="figure-caption">
               Figure: Class distribution in the Cora dataset. Each bar
