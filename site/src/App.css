@@ -1,12 +1,10 @@
-/* Global layout */
 .app {
   font-family: "Inter", system-ui, sans-serif;
-  font-size: 18px; /* BIGGER TEXT */
+  font-size: 18px;
   color: #2c2c2c;
   background: #fcfcfc;
 }
 
-/* Pastel pink header */
 .hero {
   padding: 3rem 1.5rem 2.5rem;
   text-align: center;
@@ -15,13 +13,12 @@
     #f8cce0 0%,
     #f7b6d0 40%,
     #f4a6c8 100%
-  ); /* pastel pink tones */
+  );
   color: #4a0034;
   border-bottom: 3px solid #f2a3c4;
   box-shadow: 0 10px 25px rgba(255, 180, 210, 0.3);
 }
 
-/* Titles */
 .title-main {
   font-size: 2.2rem;
   font-weight: 800;
@@ -43,7 +40,6 @@
   opacity: 0.9;
 }
 
-/* Navigation bar */
 .nav {
   display: flex;
   flex-wrap: wrap;
@@ -70,7 +66,6 @@
   transform: translateY(-2px);
 }
 
-/* Sections */
 .section {
   max-width: 900px;
   margin: 3rem auto;
@@ -78,13 +73,13 @@
 }
 
 .section h2 {
-  font-size: 1.8rem; /* bigger headers */
+  font-size: 1.8rem;
   margin-bottom: 1rem;
   color: #330022;
 }
 
 .section p {
-  font-size: 1.05rem; /* bigger paragraph text */
+  font-size: 1.05rem;
   line-height: 1.8;
   margin-bottom: 1rem;
 }
@@ -104,7 +99,6 @@
   overflow-x: auto;
 }
 
-/* Footer */
 .footer {
   text-align: center;
   padding: 2rem 0;

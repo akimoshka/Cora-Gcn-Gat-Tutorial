@@ -1,17 +1,14 @@
-// src/App.jsx
 import React from "react";
 import Section from "./components/Section";
 import MathBlock from "./components/MathBlock";
-import InteractiveEmbeddings from "./components/InteractiveEmbeddings";
 
-// --- Figures / assets ---
+// Figures and interactives
 import ClassDistrCora from "./assets/ClassDistrCora.png";
-import CoraGraphVis from "./assets/CoraGraphVis.png";
-
+import InteractiveEmbeddings from "./components/InteractiveEmbeddings";
+import CoraPCAInteractive from "./components/CoraPCAInteractive";
 import GCNTrainingLoss from "./assets/GCNTrainingLoss.png";
 import GCNValAcc from "./assets/GCNValAcc.png";
 import GCNLearnedNodeEmb from "./assets/GCNLearnedNodeEmb.png";
-
 import GATTrainingLoss from "./assets/GATTrainingLoss.png";
 import GATValAcc from "./assets/GATValAcc.png";
 import GATLearnedNodeEmb from "./assets/GATLearnedNodeEmb.png";
@@ -95,21 +92,15 @@ function App() {
           </p>
           <ul>
             <li>
-              <strong>Graph Convolutional Network (GCN)</strong> — aggregates
+              <strong>Graph Convolutional Network (GCN)</strong> - aggregates
               information from neighbors using a normalized graph convolution.
             </li>
             <li>
-              <strong>Graph Attention Network (GAT)</strong> — extends GCN by
+              <strong>Graph Attention Network (GAT)</strong> - extends GCN by
               learning <em>attention weights</em> for each edge, so some
               neighbors can be more important than others.
             </li>
           </ul>
-
-          <p>
-            The goal of this site is to guide you step by step, assuming you are
-            familiar with PyTorch and deep learning, but new to graph machine
-            learning and PyTorch Geometric.
-          </p>
         </Section>
 
         {/* 2. Cora */}
@@ -192,18 +183,7 @@ print("Features per node:", dataset.num_node_features)`}
             bag-of-words features.
           </p>
 
-          <div className="figure-wrapper">
-            <img
-              src={CoraGraphVis}
-              alt="PCA-based visualization of Cora node features"
-              className="figure"
-            />
-            <p className="figure-caption">
-              Figure: PCA visualization of node features in Cora. Nodes are
-              colored by ground-truth topic label. Some clusters are already
-              visible, but boundaries are not perfectly clean.
-            </p>
-          </div>
+          <CoraPCAInteractive />
 
           <p>
             In the following sections we will see how GCN and GAT use both these
@@ -302,7 +282,8 @@ class GCN(torch.nn.Module):
             For Cora, we use a simple two-layer GCN with a hidden dimension of
             64 and early stopping based on validation accuracy. Despite its
             simplicity, this model already achieves strong performance, reaching
-            a test accuracy of <strong>0.81</strong>.
+            a test accuracy of <strong>0.81</strong>. With early stopping, the
+            training converged after <strong>46 epochs</strong>.
           </p>
 
           <div className="figure-grid">
@@ -469,7 +450,8 @@ class GAT(torch.nn.Module):
             The final configuration is chosen by monitoring validation accuracy,
             selecting the model that generalizes best without overfitting. With
             this setup, GAT reaches a test accuracy of{" "}
-            <strong>0.772</strong>.
+            <strong>0.772</strong>. Early stopping halted training after{" "}
+            <strong>18 epochs</strong>.
           </p>
 
           <div className="figure-grid">
@@ -676,7 +658,7 @@ class GAT(torch.nn.Module):
               implementation, experiments, and attention analysis
             </li>
             <li>
-              <strong>Ekaterina Akimenko</strong> — website design, comparison
+              <strong>Ekaterina Akimenko</strong> — Website design, comparison
               notebook, visualizations, and tutorial writing
             </li>
           </ul>
