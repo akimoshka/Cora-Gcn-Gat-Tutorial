@@ -18,16 +18,16 @@ function App() {
     <div className="app">
       <header className="hero">
         <h1 className="title-main">
-          Data and Knowledge Representation Course Tutorial
+          Applying Graph Convolutional and Attention Networks to Paper
+          Classification in Citation Networks
         </h1>
 
         <h2 className="title-sub">
-          Applying Graph Convolutional and Attention Networks to Paper
-          Classification in Citation Networks
+          Data and Knowledge Representation Course Tutorial
         </h2>
 
         <h3 className="authors">
-          By: Yasmina Mamadalieva — Ekaterina Akimenko — Sofa Goryunova
+          By: Yasmina Mamadalieva, Ekaterina Akimenko, Sofa Goryunova
         </h3>
 
         <nav className="nav">
