@@ -4,7 +4,7 @@ export default function InteractiveEmbeddings() {
   return (
     <section className="interactive-section">
       <h3 className="section-subtitle">
-        Interactive t-SNE embeddings: GCN vs GAT
+        t-SNE embeddings: GCN vs GAT vs GAT+ vs GraphSAGE vs APPNP
       </h3>
       <p>
         Use the buttons in the top panel to switch between GCN and GAT. Each

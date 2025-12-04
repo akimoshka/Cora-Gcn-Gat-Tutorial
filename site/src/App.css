@@ -125,6 +125,19 @@
   border: none;
 }
 
+.interactive-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+.interactive-frame {
+  width: 100%;
+  height: 650px;
+  border: none;
+}
+
+
 .results-table {
   width: 100%;
   border-collapse: collapse;
@@ -154,4 +167,3 @@
 .results-table tbody tr:nth-child(even) {
   background-color: #fafafa;
 }
-
