@@ -1269,13 +1269,6 @@ class GAT(torch.nn.Module):
           </ul>
 
           <p>
-            The t-SNE visualizations of the learned embeddings reinforce this
-            picture: GraphSAGE produces the most compact and clearly separated
-            clusters, APPNP produces smooth but slightly more diffuse regions,
-            and GATv2 shows flexible but noisier boundaries between fields.
-          </p>
-
-          <p>
             Overall, our experiments illustrate that the relative advantage of
             different GNN architectures is dataset-dependent. On a small, clean
             citation graph such as Cora, a well-regularized two-layer GCN is
