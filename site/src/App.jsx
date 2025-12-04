@@ -603,7 +603,7 @@ class GAT(torch.nn.Module):
                 target="_blank"
                 rel="noreferrer"
               >
-                GCN on Cora — Colab
+                GCN on Cora - Colab, takes 1 or 2 minutes.
               </a>
             </li>
             <li>
@@ -612,7 +612,7 @@ class GAT(torch.nn.Module):
                 target="_blank"
                 rel="noreferrer"
               >
-                GAT on Cora — Colab
+                GAT on Cora - Colab, takes 1 or 2 minutes.
               </a>
             </li>
             <li>
@@ -621,7 +621,7 @@ class GAT(torch.nn.Module):
                 target="_blank"
                 rel="noreferrer"
               >
-                GCN vs GAT comparison — Colab
+                GCN vs GAT comparison - Colab, takes longer becuase of the interactive visualizations, about 1 hour.
               </a>
             </li>
           </ul>
